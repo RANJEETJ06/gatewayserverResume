@@ -13,17 +13,19 @@ public class GatewayRoutesConfig {
         return builder.routes()
 
                 // Route for ResumeAnalysis microservice
-                .route("ResumeAnalysis", r -> r
-                        .path("/Resume/api/ai/**")
-                        .filters(f -> f.rewritePath("/Resume/api/ai/(?<segment>.*)", "/api/ai/${segment}"))
-                        .uri("lb://RESUMEANALYSIS")  // App name in Eureka
+                .route(r -> r
+                        .path("/resume/ai/**")  // Match this full external path
+                        .filters(f -> f
+                                .rewritePath("/resume/ai/(?<segment>.*)", "/${segment}")
+                        )
+                        .uri("lb://RESUMEANALYSIS")  // Eureka service name
                 )
 
                 // Route for Resume microservice
-                .route("Resume", r -> r
-                        .path("/Resume/api/resume/**")
-                        .filters(f -> f.rewritePath("/Resume/api/resume/(?<segment>.*)", "/api/resume/${segment}"))
-                        .uri("lb://RESUME")  // App name in Eureka
+                .route(r -> r
+                        .path("/resume/api/**")
+                        .filters(f -> f.rewritePath("/resume/api/(?<segment>.*)", "/${segment}"))
+                        .uri("lb://RESUME")
                 )
 
                 .build();
