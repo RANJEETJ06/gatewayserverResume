@@ -4,6 +4,16 @@ server:
 spring:
   application:
     name: gatewayserverResume
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${google_client_id}
+            client-secret: ${google_client_secret}
+          github:
+            client-id: ${git_client_id}
+            client-secret: ${git_client_secret}
 
 eureka:
   client:
