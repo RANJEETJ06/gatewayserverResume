@@ -37,3 +37,6 @@ management:
   endpoint:
     gateway:
       access: unrestricted
+
+frontend:
+  url: http://localhost:3000
